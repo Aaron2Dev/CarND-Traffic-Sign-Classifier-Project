@@ -20,7 +20,9 @@ The goals / steps of this project are the following:
 [//]: # (Image References)
 
 [BarChart]: ./examples/BarChart.JPG "BarChart"
-[image2]: ./examples/grayscale.jpg "Grayscaling"
+[Dataset_imgs]: ./examples/Dataset_exploration.JPG "Dataset examples"
+[Grayscale]: ./examples/Grayscale.JPG "Grayscale"
+[Augmented]: ./examples/Augmented.JPG "Augmented"
 [image3]: ./examples/random_noise.jpg "Random Noise"
 [image4]: ./examples/placeholder.png "Traffic Sign 1"
 [image5]: ./examples/placeholder.png "Traffic Sign 2"
@@ -31,12 +33,6 @@ The goals / steps of this project are the following:
 ## Rubric Points
 ### Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
 
----
-### Writeup / README
-
-#### 1. Provide a Writeup / README that includes all the rubric points and how you addressed each one. You can submit your writeup as markdown or pdf. You can use this template as a guide for writing the report. The submission includes the project code.
-
-You're reading it! and here is a link to my [project code](https://github.com/udacity/CarND-Traffic-Sign-Classifier-Project/blob/master/Traffic_Sign_Classifier.ipynb)
 
 ### Data Set Summary & Exploration
 
@@ -45,57 +41,75 @@ You're reading it! and here is a link to my [project code](https://github.com/ud
 I used the pandas library to calculate summary statistics of the traffic
 signs data set:
 
-* The size of training set is ?
-* The size of the validation set is ?
-* The size of test set is ?
-* The shape of a traffic sign image is ?
-* The number of unique classes/labels in the data set is ?
+* The size of initial training set is 34799.
+* The size of the initial validation 4410.
+* The size of test set is 12630.
+* The shape of a traffic sign image is (32,32,3).
+* The number of unique classes/labels in the data set is 43.
 
 #### 2. Include an exploratory visualization of the dataset.
 
-Here is an exploratory visualization of the data set. It is a bar chart showing how the data ...
+Here is an exploratory visualization of the data set. You can see 10 random images out of the test set.
+The BarChart shows the frequency of occurence of the Traffic signs.
 
+![alt text][Dataset_imgs]
 ![alt text][BarChart]
+
 
 ### Design and Test a Model Architecture
 
 #### 1. Describe how you preprocessed the image data. What techniques were chosen and why did you choose these techniques? Consider including images showing the output of each preprocessing technique. Pre-processing refers to techniques such as converting to grayscale, normalization, etc. (OPTIONAL: As described in the "Stand Out Suggestions" part of the rubric, if you generated additional data for training, describe why you decided to generate additional data, how you generated the data, and provide example images of the additional data. Then describe the characteristics of the augmented training set like number of images in the set, number of images for each class, etc.)
 
-As a first step, I decided to convert the images to grayscale because ...
+As a first step, I decided to convert the images to grayscale because in the paper "Traffic Sign Recognition with Multi-Scale Convolutional Networks" from Pierre Sermanet and Yann LeCun there CNN performed better by grayscaled images than on color images.
 
 Here is an example of a traffic sign image before and after grayscaling.
 
-![alt text][image2]
+![alt text][Grayscale]
 
-As a last step, I normalized the image data because ...
+As a last step, I normalized the image data because it was suggested and is usually a basic preprocessing operation on images.
 
-I decided to generate additional data because ... 
+Also I generated additinal data. I tried first to train the CNN without any data augmentation and the performance. Since the performance was not high enough I decided to augment the data set.
 
-To add more data to the the data set, I used the following techniques because ... 
+To add more data to the the data set, I used basic techniques like translation, rotation, scaling and changing the brightness. In order to this I used openCV.
+Every Traffic sign with under 800 samples gets augmented.
 
-Here is an example of an original image and an augmented image:
+Here is an example of some original images and and some augmented images:
 
-![alt text][image3]
+![alt text][Augmented]
 
-The difference between the original data set and the augmented data set is the following ... 
+The Augmentation process included the following:
+-Translation in a range of -3,+3 pixels
+-Rotation in a range of -30,+30 degrees
+-Scaling - I used cv2.getPerspectiveTransform() and cv2.warpPerspective()
+-Brightness - here I the basically tried some different alpha and beta values and ended up with an alpha between [1-1.5] and a beta [-50,50]
 
+After the augmentation process the size of my training set was 46480.
 
 #### 2. Describe what your final model architecture looks like including model type, layers, layer sizes, connectivity, etc.) Consider including a diagram and/or table describing the final model.
 
-My final model consisted of the following layers:
+I used the LeNet Architecture and just made a few changes.
 
-| Layer         		|     Description	        					| 
-|:---------------------:|:---------------------------------------------:| 
-| Input         		| 32x32x3 RGB image   							| 
-| Convolution 3x3     	| 1x1 stride, same padding, outputs 32x32x64 	|
-| RELU					|												|
-| Max pooling	      	| 2x2 stride,  outputs 16x16x64 				|
-| Convolution 3x3	    | etc.      									|
-| Fully connected		| etc.        									|
-| Softmax				| etc.        									|
-|						|												|
-|						|												|
- 
+
+Input
+Convolution Layer1
+RELU
+Max pooling
+Convolution Layer2
+RELU
+Max pooling
+Flatten
+Fully Connected Layer 3
+RELU
+(Dropout)					
+Fully Connected Layer 4
+RELU
+(Dropout)
+Fully Connected Layer 5
+
+
+The Input layer consisted of grayscale images with shape (32,32,1).
+For the activation function I tried RELU as well as tanh(). After some tries and reading I decided to use the RELU function.
+I also added to dropout Layer to the architecture. Only after the convolutinal part.
 
 
 #### 3. Describe how you trained your model. The discussion can include the type of optimizer, the batch size, number of epochs and any hyperparameters such as learning rate.
