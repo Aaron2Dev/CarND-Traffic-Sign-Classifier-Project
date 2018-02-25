@@ -135,7 +135,6 @@ Here are five German traffic signs that I found on the web:
 
 ![alt text][new_imgs]
 
-They appear blue cause of the way I used to rad the images.
 
 #### 2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).
 
@@ -150,7 +149,7 @@ Here are the results of the prediction:
 | Priority road			| Priority road	      							|
 
 
-The model was able to correctly guess 4 of the 5 traffic signs, which gives an accuracy of 80%. The only one which was missclassified is the 60km/h speed limit and it was classified by the model as a 50km/h speed limit sign.(They look quite similiar)
+The model was able to correctly guess 4 of the 5 traffic signs, which gives an accuracy of 80%. The only one which was missclassified is the 60km/h speed limit and it was classified as a 50km/h speed limit sign.(They look quite similiar)
 
 #### 3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
 
