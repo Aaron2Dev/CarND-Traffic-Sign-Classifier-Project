@@ -50,7 +50,7 @@ signs data set:
 #### 2. Include an exploratory visualization of the dataset.
 
 Here is an exploratory visualization of the data set. You can see 10 random images out of the test set.
-The BarChart shows the frequency of occurence of the Traffic signs.
+The Barchart shows the frequency of occurence of the Traffic signs.
 
 ![alt text][Dataset_imgs]
 ![alt text][BarChart]
@@ -60,17 +60,17 @@ The BarChart shows the frequency of occurence of the Traffic signs.
 
 #### 1. Describe how you preprocessed the image data. What techniques were chosen and why did you choose these techniques? Consider including images showing the output of each preprocessing technique. Pre-processing refers to techniques such as converting to grayscale, normalization, etc. (OPTIONAL: As described in the "Stand Out Suggestions" part of the rubric, if you generated additional data for training, describe why you decided to generate additional data, how you generated the data, and provide example images of the additional data. Then describe the characteristics of the augmented training set like number of images in the set, number of images for each class, etc.)
 
-As a first step, I decided to convert the images to grayscale because in the paper "Traffic Sign Recognition with Multi-Scale Convolutional Networks" from Pierre Sermanet and Yann LeCun there CNN performed better by grayscaled images than on color images.
+As a first step, I decided to convert the images to grayscale. In the paper "Traffic Sign Recognition with Multi-Scale Convolutional Networks" from Pierre Sermanet and Yann LeCun the CNN performed better by grayscaled images than on color images.
 
-Here is an example of a traffic sign image before and after grayscaling.
+Here are some examples before and after grayscaling:
 
 ![alt text][Grayscale]
 
-As a last step, I normalized the image data because it was suggested and is usually a basic preprocessing operation on images.
+As a last step, I normalized the image data. (It was suggested and is usually a basic preprocessing operation on images.)
 
-Also I generated additinal data. I tried first to train the CNN without any data augmentation and the performance. Since the performance was not high enough I decided to augment the data set.
+Also I generated additional data. I tried first to train the CNN without any data augmentation and the performance. Since the performance was not high enough, I decided to augment the data set.
 
-To add more data to the the data set, I used basic techniques like translation, rotation, scaling and changing the brightness. In order to this I used openCV.
+To generate more data, I used basic techniques like translation, rotation, scaling and changing the brightness. In order to this I used openCV.
 Every Traffic sign with under 800 samples gets augmented.
 
 Here is an example of some original images and and some augmented images:
@@ -78,10 +78,10 @@ Here is an example of some original images and and some augmented images:
 ![alt text][Augmented]
 
 The Augmentation process included the following:
-*Translation in a range of -3,+3 pixels
-*Rotation in a range of -30,+30 degrees
-*Scaling - I used cv2.getPerspectiveTransform() and cv2.warpPerspective()
-*Brightness - here I the basically tried some different alpha and beta values and ended up with an alpha between [1-1.5] and a beta [-50,50]
+* Translation in a range of -3,+3 pixels
+* Rotation in a range of -30,+30 degrees
+* Scaling - I used cv2.getPerspectiveTransform() and cv2.warpPerspective()
+* Brightness - here I the basically tried some different alpha and beta values and ended up with an alpha between [1-1.5] and a beta [-50,50]
 
 After the augmentation process the size of my training set was 46480.
 
@@ -90,21 +90,21 @@ After the augmentation process the size of my training set was 46480.
 I used the LeNet Architecture and just made a few changes.
 
 
-*Input
-*Convolution Layer1
-*RELU
-*Max pooling
-*Convolution Layer2
-*RELU
-*Max pooling
-*Flatten
-*Fully Connected Layer 3
-*RELU
-*(Dropout)					
-*Fully Connected Layer 4
-*RELU
-*(Dropout)
-*Fully Connected Layer 5
+* Input
+* Convolution Layer1
+* RELU
+* Max pooling
+* Convolution Layer2
+* RELU
+* Max pooling
+* Flatten
+* Fully Connected Layer 3
+* RELU
+* (Dropout)					
+* Fully Connected Layer 4
+* RELU
+* (Dropout)
+* Fully Connected Layer 5
 
 
 The Input layer consisted of grayscale images with shape (32,32,1).
@@ -114,9 +114,9 @@ I also added to dropout Layer to the architecture. Only after the convolutinal p
 
 #### 3.Hyperparameters
 
-*Epochs: 15
-*The optimizer, learning rate and batch size I leaved unchanged.
-*For the dropout I used and a keeping probability of 0.5.
+* Epochs: 15
+* The optimizer, learning rate and batch size I leaved unchanged.
+* For the dropout I used and a keeping probability of 0.5.
 
 #### 4. Describe the approach taken for finding a solution and getting the validation set accuracy to be at least 0.93. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
 
