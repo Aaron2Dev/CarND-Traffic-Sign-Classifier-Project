@@ -121,8 +121,8 @@ I also added to dropout Layer to the architecture. Only after the convolutinal p
 #### 4. Describe the approach taken for finding a solution and getting the validation set accuracy to be at least 0.93. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
 
 My final model results were:
-* validation set accuracy of 97% 
-* test set accuracy of 89,3%
+* validation set accuracy of 97,1% 
+* test set accuracy of 89,5%
 
 I started my approach with the basic LeNet architecture. Based on the accuracy improvement I tried different methods, which were suggested in the Traffic sign Classification Paper.
  
@@ -145,11 +145,11 @@ Here are the results of the prediction:
 | Speed limit (60km/h)  | Speed limit (50km/h)  						| 
 | Road work    			| Road work  									|
 | No entry				| No entry										|
-| No passing	      	| No passing					 				|
+| No passing	      	| End of no passing					 				|
 | Priority road			| Priority road	      							|
 
 
-The model was able to correctly guess 4 of the 5 traffic signs, which gives an accuracy of 80%. The only one which was missclassified is the 60km/h speed limit and it was classified as a 50km/h speed limit sign.(They look quite similiar)
+The model was able to correctly guess 3 of the 5 traffic signs, which gives an accuracy of 60%. The 60km/h speed limit was classified as a 50km/h speed limit sign.(They look quite similiar). And the sign "No passing" was calssified with 59.7% as "End of no passing", the model predicted with 40.1% the correct classification.
 
 #### 3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
 
@@ -157,10 +157,10 @@ The model was able to correctly guess 4 of the 5 traffic signs, which gives an a
 
 | Probability         	|     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
-|89,7%					|Speed limit (50km/h							|
-|100%       			| Road work  									| 
-|99.6%      			| No entry 										|
-|75%					| No passing									|
+|97.9%					|Speed limit (50km/h							|
+|99.9%       			| Road work  									| 
+|98.7%      			| No entry 										|
+|59.7%					| End of no passing									|
 |99.9%	      			| Priority road					 				|
 
 
